@@ -22,7 +22,7 @@ export default function BookCard({ book }) {
 
 const addFavorite = async () => {
   try {
-    await axios.post('http://localhost:5000/favorite', {
+    await axios.post('https://book-search-backend.up.railway.app/favorite', {
       bookId: book.id,
       title: info.title,
       author: info.authors?.join(', '),

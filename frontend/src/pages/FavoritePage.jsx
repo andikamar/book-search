@@ -29,12 +29,12 @@ export default function FavoritePage() {
   const [animationData, setAnimationData] = useState(null);
 
   const loadData = async () => {
-    const res = await axios.get('http://localhost:5000/favorite');
+    const res = await axios.get('https://book-search-backend.up.railway.app/favorite');
     setItems(res.data);
   };
 
   const removeItem = async (id) => {
-    await axios.delete(`http://localhost:5000/favorite/${id}`);
+    await axios.delete(`https://book-search-backend.up.railway.app/favorite/${id}`);
 
     toast.success('Removed from favorite');
 
