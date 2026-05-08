@@ -1,0 +1,22 @@
+{
+  "name": "book-search",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "bulma": "^1.0.0",
+    "lottie-react": "^2.4.1",
+    "prop-types": "^15.8.1",
+    "rater-js": "^1.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.26.0",
+    "react-toastify": "^10.0.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.0",
+    "vite": "^5.0.0"
+  }
+}
