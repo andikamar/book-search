@@ -8,6 +8,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+  const [error, setError] = useState('');
 
   const booksPerPage = 9;
 
@@ -19,7 +20,7 @@ export default function HomePage() {
     const startIndex = (currentPage - 1) * booksPerPage;
 
     const res = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${startIndex}&maxResults=${booksPerPage}`
+      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&startIndex=${startIndex}&maxResults=${booksPerPage}`
     );
 
     setBooks(res.data.items || []);
@@ -33,6 +34,16 @@ export default function HomePage() {
     20
   );
 
+  const handleSearch = () => {
+  if (!query.trim()) {
+    setError('Please enter a search keyword');
+    return;
+  }
+  setError('');
+  setPage(1);
+  searchBooks(1);
+};
+
   return (
     <div className="container mt-5">
        <h1 className="title has-text-centered mb-5">Search Books</h1>
@@ -42,18 +53,28 @@ export default function HomePage() {
           <input
             className="input"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setError('');
+            }}
+            onKeyDown={(e) => {
+             if (e.key === 'Enter') {
+              handleSearch();
+            }
+            }}
             placeholder="Search books"
           />
+          {error && (
+            <p className="has-text-danger mt-2">
+              {error}
+            </p>
+          )}
         </div>
 
         <div className="control">
           <button
             className="button is-primary"
-            onClick={() => {
-              setPage(1);
-              searchBooks(1);
-            }}
+            onClick={handleSearch}
           >
             Search
           </button>
